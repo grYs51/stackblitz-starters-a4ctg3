@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import 'zone.js';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideRouter, RouterOutlet } from '@angular/router';
+import { routes } from './app.routes';
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [RouterOutlet],
   template: `
-    <h1>Interview App</h1>
-    <p>Please read the README file.</p>
+    <router-outlet />
   `,
 })
 export class App {
@@ -16,5 +18,5 @@ export class App {
 }
 
 bootstrapApplication(App, {
-  providers: [provideAnimationsAsync()]
+  providers: [provideAnimationsAsync(), provideRouter(routes)]
 });
