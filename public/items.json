@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "Wireless Mouse",
+    "description": "A comfortable wireless mouse with ergonomic design.",
+    "price": 29.99,
+    "stock": 100
+  },
+  {
+    "id": 2,
+    "title": "Mechanical Keyboard",
+    "description": "A high-performance mechanical keyboard with customizable RGB lighting.",
+    "price": 89.99,
+    "stock": 50
+  },
+  {
+    "id": 3,
+    "title": "27-inch Monitor",
+    "description": "A 27-inch 4K UHD monitor with vibrant colors and sharp images.",
+    "price": 349.99,
+    "stock": 30
+  },
+  {
+    "id": 4,
+    "title": "USB-C Hub",
+    "description": "A multi-port USB-C hub with HDMI, USB 3.0, and SD card reader.",
+    "price": 49.99,
+    "stock": 200
+  },
+  {
+    "id": 5,
+    "title": "Noise-Cancelling Headphones",
+    "description": "Over-ear noise-cancelling headphones with long battery life.",
+    "price": 199.99,
+    "stock": 75
+  }
+]
