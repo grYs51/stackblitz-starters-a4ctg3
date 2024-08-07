@@ -4882,6 +4882,7 @@ __metadata:
     jest: "npm:^29.7.0"
     jest-preset-angular: "npm:^14.2.2"
     json-server: "npm:^1.0.0-beta.1"
+    ngrx-store-localstorage: "npm:^18.0.0"
     rxjs: "npm:^7.8.1"
     ts-node: "npm:^10.9.2"
     tslib: "npm:^2.5.0"
@@ -9680,6 +9681,20 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: 10c0/c2f5a604a54a8ec5438a342e1f356dff4bc33ccccdb6dc668d94fe8e5eccfc9d2c2eea6064b0967a767ba63b33763f51ccf2cd2441b461a7322656c1f06b3f5d
+  languageName: node
+  linkType: hard
+
+"ngrx-store-localstorage@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "ngrx-store-localstorage@npm:18.0.0"
+  dependencies:
+    deepmerge: "npm:^4.2.2"
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    "@angular/common": ^18.0.1
+    "@angular/core": ^18.0.1
+    "@ngrx/store": ^18.0.0
+  checksum: 10c0/df6dc2d7f53212a13d669f1a8c39bc9281c54b40c76de0a330d93a19eb7a9f55952c2cc020a0e87c7f05bd992346dc666460c7c47167b0028917d1376980d507
   languageName: node
   linkType: hard
 

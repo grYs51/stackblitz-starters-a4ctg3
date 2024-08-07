@@ -26,6 +26,7 @@
     "@ngrx/store": "^18.0.2",
     "@ngrx/store-devtools": "^18.0.2",
     "json-server": "^1.0.0-beta.1",
+    "ngrx-store-localstorage": "^18.0.0",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0",
     "zone.js": "~0.14.0"
