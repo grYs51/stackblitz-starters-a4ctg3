@@ -7,6 +7,8 @@ import { routes } from "./app.routes";
 import { provideStore } from "@ngrx/store";
 import { provideStoreDevtools } from "@ngrx/store-devtools";
 import { provideEffects } from "@ngrx/effects";
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import { apiInterceptor } from "./shared/interceptors/api.interceptor";
 
 @Component({
   selector: "app-root",
@@ -26,5 +28,6 @@ bootstrapApplication(App, {
     provideStore(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects(),
+    provideHttpClient(withInterceptors([apiInterceptor])),
   ],
 });
