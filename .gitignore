@@ -1,3 +1,9 @@
 .angular
 dist
 node_modules
+
+# yarn
+.yarn/install-state.gz
+
+# .vscode
+.vscode/*
