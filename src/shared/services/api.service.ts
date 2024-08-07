@@ -13,4 +13,8 @@ export class ApiService {
     return this.http.get<Listing[]>("/api/listings");
   }
 
+  fetchListing(id: string) {
+    return this.http.get<Listing>(`/api/listings/${id}`);
+  }
+
 }

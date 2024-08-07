@@ -9,6 +9,10 @@ export const routes: Route[] = [
       {
         path: '',
         loadChildren: () => import('./pages/listing-result/listing-result.routes')
+      },
+      {
+        path: 'listing-detail',
+        loadChildren: () => import('./pages/listing-detail/listing-detail.routes')
       }
     ]
   }

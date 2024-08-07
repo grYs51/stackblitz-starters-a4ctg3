@@ -1,0 +1,28 @@
+<div class="container">
+  @if(listing$ | ngrxPush; as listing) {
+  <div class="grid">
+    <div class="grid-item">
+      <img class="image" [alt]="listing.title" [src]="listing.image" />
+    </div>
+    <div class="grid-item">
+      <h1>{{ listing.title }}</h1>
+      <p>{{ listing.description }}</p>
+      <p>
+        <span>
+          € {{ listing.price }} |
+        </span>
+        @if(listing.stock > 0) {
+        <strong>{{ listing.stock }}</strong> in stock
+        } @else {
+        Out of stock
+        }
+      </p>
+      <button (click)="addToCart()" mat-raised-button>Add to cart</button>
+    </div>
+  </div>
+  } @else {
+  <div>
+    <p>Not found</p>
+  </div>
+  }
+</div>
