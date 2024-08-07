@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ListingDetailFacade } from "./store/listing-detail.facade";
 import { PushPipe } from "@ngrx/component";
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from "@angular/material/button";
+import { ShoppingCartFacade } from "../../features/shopping-cart/store/shopping-cart.facade";
 
 @Component({
   selector: "app-listing-detail",
@@ -14,11 +15,13 @@ import {MatButtonModule} from '@angular/material/button';
 export class ListingDetailComponent {
   private facade = inject(ListingDetailFacade);
 
+  private shoppingCartFacade = inject(ShoppingCartFacade);
+
   listing$ = this.facade.listing$;
 
   loading$ = this.facade.loading$;
 
-  addToCart() {
-    console.log("Adding to cart");
+  addToCart(id: string) {
+    this.shoppingCartFacade.addToCart(id);
   }
 }

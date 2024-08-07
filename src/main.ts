@@ -24,7 +24,7 @@ bootstrapApplication(App, {
   providers: [
     provideAnimationsAsync(),
     provideRouter(routes),
-    storeProviders,
+    ...storeProviders,
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideHttpClient(withInterceptors([apiInterceptor])),
   ],

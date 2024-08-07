@@ -11,8 +11,9 @@ import {
 import { localStorageSync } from "ngrx-store-localstorage";
 import { provideEffects } from "@ngrx/effects";
 import { ShoppingCartEffects } from "../effects/shopping-cart.effects";
+import { ShoppingCartFacade } from "./shopping-cart.facade";
 
-export const featureName = "shopping-cart";
+export const featureName = "shoppingCart";
 
 export interface ShoppingCart {
   shoppingCart: ShoppingCartState;
@@ -32,9 +33,10 @@ const localStorageSyncReducer = (reducer: ActionReducer<ShoppingCart>) => {
 const metaReducers: MetaReducer[] = [localStorageSyncReducer];
 
 export const selectFeature =
-  createFeatureSelector<ShoppingCartState>(featureName);
+  createFeatureSelector<ShoppingCart>(featureName);
 
 export const storeProviders = [
   provideEffects([ShoppingCartEffects]),
   provideStore(reducers, { metaReducers }),
+  ShoppingCartFacade
 ];

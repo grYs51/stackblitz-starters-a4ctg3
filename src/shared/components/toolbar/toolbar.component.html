@@ -1,7 +1,10 @@
 <mat-toolbar>
-  <h2>Grace's Shop</h2>
+  <a routerLink="/" class="logo">
+    <h2>Grace's Shop</h2>
+  </a>
   <span class="spacing"></span>
-  <button mat-icon-button class="example-icon shopping_cart-icon" aria-label="Example icon-button with heart icon">
+  <button mat-icon-button class=" shopping_cart-icon" aria-label="shopping cart" (click)="openCart()"
+    [matBadge]="total$ |ngrxPush" [matBadgeHidden]="(total$ | ngrxPush) === 0">
     <mat-icon>shopping_cart</mat-icon>
   </button>
 </mat-toolbar>
