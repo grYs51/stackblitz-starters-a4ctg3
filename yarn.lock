@@ -3084,6 +3084,68 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ngrx/component@npm:^18.0.2":
+  version: 18.0.2
+  resolution: "@ngrx/component@npm:18.0.2"
+  dependencies:
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    "@angular/common": ^18.0.0
+    "@angular/core": ^18.0.0
+    rxjs: ^6.5.3 || ^7.5.0
+  checksum: 10c0/e83d9ef1ae1796f8fdd5f52af6abe1c87007d586ae921b250279b46aeefe386aed335fc54479ee21aa7aeba2ebe87f0f9ded7ea4740cba1eb0524a144a5cde30
+  languageName: node
+  linkType: hard
+
+"@ngrx/effects@npm:^18.0.2":
+  version: 18.0.2
+  resolution: "@ngrx/effects@npm:18.0.2"
+  dependencies:
+    "@ngrx/operators": "npm:18.0.1"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    "@angular/core": ^18.0.0
+    "@ngrx/store": 18.0.2
+    rxjs: ^6.5.3 || ^7.5.0
+  checksum: 10c0/0d590c48c49cd2997cc51c0884cc1e0168f77492e8cbb344bfcf56175663d5ee58b0711ebc062c25e68b9d82ae2079395b3840d7dd88aca210a6b80b0d78352d
+  languageName: node
+  linkType: hard
+
+"@ngrx/operators@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@ngrx/operators@npm:18.0.1"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    rxjs: ^6.5.3 || ^7.4.0
+  checksum: 10c0/e40e5a4f101df09702a3025fdc3615bcfef96c9748822bed1485ade36e15fe7198c86b8c01e927d715f37039a0f47103dcc76ad54b1507570f9e118a67b1227c
+  languageName: node
+  linkType: hard
+
+"@ngrx/store-devtools@npm:^18.0.2":
+  version: 18.0.2
+  resolution: "@ngrx/store-devtools@npm:18.0.2"
+  dependencies:
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    "@ngrx/store": 18.0.2
+    rxjs: ^6.5.3 || ^7.5.0
+  checksum: 10c0/62aceba92450084f2e734911a112db141903aac438e12620d4badbeebc5aef3e35da7b801a0fd38981fe141c4905962430af64cb1e38e6f5b236dd2ee49c894c
+  languageName: node
+  linkType: hard
+
+"@ngrx/store@npm:^18.0.2":
+  version: 18.0.2
+  resolution: "@ngrx/store@npm:18.0.2"
+  dependencies:
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    "@angular/core": ^18.0.0
+    rxjs: ^6.5.3 || ^7.5.0
+  checksum: 10c0/46d814a36674eb8a8fd67a5c2638af847ed8f6c2ae1beb6e637d38301b3d9d8c822a1945c372802d02b275f69192af508f3402ff0205daa19c7c6d6bed8486ec
+  languageName: node
+  linkType: hard
+
 "@ngtools/webpack@npm:18.1.3":
   version: 18.1.3
   resolution: "@ngtools/webpack@npm:18.1.3"
@@ -4639,6 +4701,10 @@ __metadata:
     "@angular/platform-browser": "npm:^18.0.0"
     "@angular/platform-browser-dynamic": "npm:^18.1.3"
     "@angular/router": "npm:^18.0.0"
+    "@ngrx/component": "npm:^18.0.2"
+    "@ngrx/effects": "npm:^18.0.2"
+    "@ngrx/store": "npm:^18.0.2"
+    "@ngrx/store-devtools": "npm:^18.0.2"
     "@types/jest": "npm:^29.5.12"
     angular-eslint: "npm:18.2.0"
     eslint: "npm:^9.8.0"
