@@ -13,6 +13,7 @@ import { routes } from './app.routes';
     <router-outlet />
   `,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class App {
   name = 'Angular';
 }
