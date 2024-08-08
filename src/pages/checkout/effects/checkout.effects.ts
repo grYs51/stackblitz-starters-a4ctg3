@@ -8,6 +8,7 @@ import {
   delay,
   withLatestFrom,
   tap,
+  filter,
 } from "rxjs";
 import {
   sendOrder,
@@ -35,12 +36,8 @@ export class CheckoutEffects {
     this.router.events.pipe(
       navigatedTo(CheckoutComponent),
       withLatestFrom(this.listingResultFacade.listings$),
-      map(([, listings]) => {
-        if (listings.length === 0) {
-          return fetchListingResults();
-        }
-        return { type: "NOOP" };
-      })
+      filter(([, listings]) => listings.length === 0),
+      map(() => fetchListingResults())
     )
   );
 
