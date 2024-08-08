@@ -7,7 +7,7 @@ import { routes } from "./app.routes";
 import { provideStoreDevtools } from "@ngrx/store-devtools";
 import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import { apiInterceptor } from "./shared/interceptors/api.interceptor";
-import { storeProviders } from "./features/shopping-cart/store";
+import { storeProviders } from "./features/provideStore";
 
 @Component({
   selector: "app-root",
@@ -24,7 +24,7 @@ bootstrapApplication(App, {
   providers: [
     provideAnimationsAsync(),
     provideRouter(routes),
-    ...storeProviders,
+    storeProviders(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideHttpClient(withInterceptors([apiInterceptor])),
   ],

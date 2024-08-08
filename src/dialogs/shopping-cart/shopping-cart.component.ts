@@ -44,7 +44,7 @@ export class ShoppingCartComponent {
   }
 
   incrementItem(id: string) {
-    this.facade.addToCart(id);
+    this.facade.increment(id);
   }
 
   decrementItem(id: string) {

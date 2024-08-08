@@ -1,9 +1,9 @@
 import { createSelector, Store } from "@ngrx/store";
-import { selectFeature } from ".";
 import { inject, Injectable } from "@angular/core";
+import { ListingState } from ".";
 
-const selectListingResultState = createSelector(selectFeature, (state) => state.listingResults);
-const selectListings = createSelector(selectListingResultState, (state) => state.listings);
+const selectListingResultState = (state: object) => (state as ListingState).listingResults;
+export const selectListings = createSelector(selectListingResultState, (state) => state.listings);
 const selectLoading = createSelector(selectListingResultState, (state) => state.loading);
 const selectError = createSelector(selectListingResultState, (state) => state.error);
 

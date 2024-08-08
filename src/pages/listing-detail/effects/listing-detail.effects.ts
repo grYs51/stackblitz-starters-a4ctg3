@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 
-import { switchMap, map, catchError, of, tap } from "rxjs";
+import { switchMap, map, catchError, of } from "rxjs";
 import { ApiService } from "../../../shared/services/api.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { navigatedTo } from "../../../shared/utils/router";
@@ -31,7 +31,6 @@ export class ListingDetailEffects {
   fetchListings$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fetchListingDetail),
-      tap((action) => console.log("Fetching listing detail", action.id)),
       switchMap(({ id }) => this.api.fetchListing(id)),
       map((listing) => fetchListingDetailSuccess({ listing })),
       catchError((error) => of(fetchListingDetailFailure({ error })))

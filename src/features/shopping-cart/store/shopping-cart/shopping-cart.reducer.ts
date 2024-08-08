@@ -1,26 +1,23 @@
 import { createReducer, on } from "@ngrx/store";
-import { addToCart, removeFromCart, clearCart, fetchCartItemsSuccess, decrementFromCart } from "./shopping-cart.actions";
-import { Listing } from "../../../../shared/models/listing";
+import { removeFromCart, clearCart, fetchCartItemsSuccess, decrementFromCart, incrementFromCart, addToCartSuccess } from "./shopping-cart.actions";
 
 type products = Record<string, number>;
 
 export interface ShoppingCartState {
   products: products;
-  listings: Listing[];
   loading: boolean;
   error: unknown;
 }
 
 export const initialState: ShoppingCartState = {
   products: {},
-  listings: [],
   loading: false,
   error: null,
 };
 
 export const shoppingCartReducer = createReducer(
   initialState,
-  on(addToCart, (state, { id }) => ({
+  on(addToCartSuccess, incrementFromCart, (state, { id }) => ({
     ...state,
     products: {
       ...state.products,

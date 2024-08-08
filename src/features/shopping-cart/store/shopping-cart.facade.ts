@@ -9,13 +9,13 @@ import {
 } from "./shopping-cart/shopping-cart.actions";
 import { combineLatest, map } from "rxjs";
 import { ShoppingCart } from ".";
+import { selectListings } from "../../listing/store/listing-result.facade";
 
 const selectState = (state: object) =>
   (state as ShoppingCart).shoppingCart;
 const selectCart = createSelector(selectState, (state) => state.products);
 const selectLoading = createSelector(selectState, (state) => state.loading);
 const selectError = createSelector(selectState, (state) => state.error);
-const selectListings = createSelector(selectState, (state) => state.listings);
 
 @Injectable()
 export class ShoppingCartFacade {
@@ -52,6 +52,10 @@ export class ShoppingCartFacade {
   );
 
   addToCart(id: string) {
+    this.store.dispatch(addToCart({ id }));
+  }
+
+  increment(id: string) {
     this.store.dispatch(addToCart({ id }));
   }
   

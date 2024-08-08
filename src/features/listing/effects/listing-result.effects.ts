@@ -1,15 +1,12 @@
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import {
-  fetchListingResults,
-  fetchListingResultsFailure,
-  fetchListingResultsSuccess,
-} from "../store/listing-result/listing-result.actions";
 import { switchMap, map, catchError, of } from "rxjs";
 import { ApiService } from "../../../shared/services/api.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { navigatedTo } from "../../../shared/utils/router";
-import { ListingResultComponent } from "../listing-result.component";
+import { ListingResultComponent } from "../../../pages/listing-result/listing-result.component";
+import { fetchListingResults, fetchListingResultsSuccess, fetchListingResultsFailure } from "../store/listing-result/listing-result.actions";
+import { openShoppingCartDialog } from "../../shopping-cart/store/shopping-cart/shopping-cart.actions";
 
 @Injectable()
 export class ListingResultEffects {
@@ -30,7 +27,7 @@ export class ListingResultEffects {
 
   fetchListings$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fetchListingResults),
+      ofType(fetchListingResults, openShoppingCartDialog),
       switchMap(() => this.api.fetchListings()),
       map((listings) => fetchListingResultsSuccess({ listings })),
       catchError((error) => of(fetchListingResultsFailure({ error })))
