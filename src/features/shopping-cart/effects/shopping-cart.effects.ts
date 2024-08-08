@@ -6,8 +6,9 @@ import {
   addToCartSuccess,
   openShoppingCartDialog,
   removeFromCart,
+  updateCart,
 } from "../store/shopping-cart/shopping-cart.actions";
-import { map, tap, withLatestFrom } from "rxjs";
+import { filter, map, tap, withLatestFrom } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { ShoppingCartComponent } from "../../../dialogs/shopping-cart/shopping-cart.component";
 import { ShoppingCartFacade } from "../store/shopping-cart.facade";
@@ -90,6 +91,49 @@ export class ShoppingCartEffects {
         ofType(removeFromCart),
         tap(() => {
           this.toastr.success("Item removed from cart", "Item removed");
+        })
+      ),
+    { dispatch: false }
+  );
+
+  checkIfAllItemsInCartAreAvailable$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(openShoppingCartDialog),
+      withLatestFrom(this.facade.cart$, this.facade.listings$),
+      filter(([, , listings]) => !!listings),
+      map(([, cart, listings]) => {
+        const updatedCart = Object.entries(cart).reduce(
+          (acc, [id, quantity]) => {
+            const listing = listings.find((listing) => listing.id === id);
+            if (!listing) {
+              return acc;
+            }
+            const updatedQuantity = Math.min(quantity, listing.stock);
+            return { ...acc, [id]: updatedQuantity };
+          },
+          {} as Record<string, number>
+        );
+
+        const totalItemsInCart = Object.values(cart).reduce((acc, quantity) => acc + quantity, 0);
+        const totalItemsInUpdatedCart = Object.values(updatedCart).reduce(
+          (acc, quantity) => acc + quantity,
+          0
+        );
+
+        if (totalItemsInCart !== totalItemsInUpdatedCart) {
+          return updateCart({ products: updatedCart });
+        }
+        return { type: "NOOP" };
+      })
+    )
+  );
+
+  toastWhenCartUpdated$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updateCart),
+        tap(() => {
+          this.toastr.info("Some items are out of stock or have been removed", "Cart updated");
         })
       ),
     { dispatch: false }

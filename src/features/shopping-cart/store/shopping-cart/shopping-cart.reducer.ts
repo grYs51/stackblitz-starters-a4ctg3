@@ -1,10 +1,18 @@
 import { createReducer, on } from "@ngrx/store";
-import { removeFromCart, clearCart, fetchCartItemsSuccess, decrementFromCart, incrementFromCart, addToCartSuccess } from "./shopping-cart.actions";
+import {
+  removeFromCart,
+  clearCart,
+  fetchCartItemsSuccess,
+  decrementFromCart,
+  incrementFromCart,
+  addToCartSuccess,
+  updateCart,
+} from "./shopping-cart.actions";
 
-export type products = Record<string, number>;
+export type Products = Record<string, number>;
 
 export interface ShoppingCartState {
-  products: products;
+  products: Products;
   loading: boolean;
   error: unknown;
 }
@@ -45,7 +53,10 @@ export const shoppingCartReducer = createReducer(
       products: newProducts,
     };
   }),
-
+  on(updateCart, (state, { products }) => ({
+    ...state,
+    products,
+  })),
   on(clearCart, (state) => ({
     ...state,
     products: {},
@@ -53,5 +64,5 @@ export const shoppingCartReducer = createReducer(
   on(fetchCartItemsSuccess, (state, { listings }) => ({
     ...state,
     listings,
-  })),
+  }))
 );

@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
 import { Listing } from "../../../../shared/models/listing";
+import { Products } from "./shopping-cart.reducer";
 const shoppingCartActionGroup = createActionGroup({
   source: "Shopping Cart",
   events: {
@@ -12,7 +13,7 @@ const shoppingCartActionGroup = createActionGroup({
     incrementFromCart: props<{ id: string }>(),
     decrementFromCart: props<{ id: string }>(),
     removeFromCart: props<{ id: string }>(),
-    updateCart: props<{ id: string, quantity: number }>(),
+    updateCart: props<{ products: Products }>(),
     clearCart: emptyProps(),
     openShoppingCartDialog: emptyProps(),
   },
