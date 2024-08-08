@@ -13,6 +13,10 @@ export const routes: Route[] = [
       {
         path: 'listing-detail',
         loadChildren: () => import('./pages/listing-detail/listing-detail.routes')
+      },
+      {
+        path: 'checkout',
+        loadComponent: () => import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent)
       }
     ]
   }

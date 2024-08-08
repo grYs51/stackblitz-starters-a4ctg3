@@ -8,6 +8,7 @@ import { CartItemComponent } from "./components/cart-item/cart-item.component";
 import { Observable } from "rxjs";
 import { Listing } from "../../shared/models/listing";
 import { CurrencyPipe } from "@angular/common";
+import { RouterLink } from "@angular/router";
 
 interface CartItem extends Listing {
   quantity: number;
@@ -25,6 +26,7 @@ interface CartItem extends Listing {
     CartItemComponent,
     MatDividerModule,
     CurrencyPipe,
+    RouterLink,
   ],
   templateUrl: "./shopping-cart.component.html",
   styleUrl: "./shopping-cart.component.scss",
