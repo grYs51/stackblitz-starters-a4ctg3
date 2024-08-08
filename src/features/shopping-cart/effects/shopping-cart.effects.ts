@@ -5,12 +5,14 @@ import {
   addToCartFailure,
   addToCartSuccess,
   openShoppingCartDialog,
+  removeFromCart,
 } from "../store/shopping-cart/shopping-cart.actions";
 import { map, tap, withLatestFrom } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { ShoppingCartComponent } from "../../../dialogs/shopping-cart/shopping-cart.component";
 import { ShoppingCartFacade } from "../store/shopping-cart.facade";
 import { ApiService } from "../../../shared/services/api.service";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable()
 export class ShoppingCartEffects {
@@ -21,6 +23,8 @@ export class ShoppingCartEffects {
   facade = inject(ShoppingCartFacade);
 
   api = inject(ApiService);
+
+  toastr = inject(ToastrService);
 
   openShoppingCartDialog$ = createEffect(
     () =>
@@ -47,10 +51,47 @@ export class ShoppingCartEffects {
         }
         const quantity = cart[action.id] || 0;
         if (quantity >= listing.stock) {
-          return addToCartFailure({ error: "Item out of stock" });
+          return addToCartFailure({ error: "Not enough stock" });
         }
-        return addToCartSuccess({ id: action.id });
+        return addToCartSuccess({ id: action.id, quantity, listing });
       })
     )
+  );
+
+  // Toast
+  addToCartSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(addToCartSuccess),
+        tap(({ listing, quantity }) => {
+          this.toastr.success(
+            `${quantity + 1}x ${listing.title} in cart`,
+            "Item added to cart"
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  addToCartFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(addToCartFailure),
+        tap(({ error }) => {
+          this.toastr.error(error as string);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  clearItems$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(removeFromCart),
+        tap(() => {
+          this.toastr.success("Item removed from cart", "Item removed");
+        })
+      ),
+    { dispatch: false }
   );
 }

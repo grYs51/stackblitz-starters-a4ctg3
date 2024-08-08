@@ -8,6 +8,7 @@ import { provideStoreDevtools } from "@ngrx/store-devtools";
 import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import { apiInterceptor } from "./shared/interceptors/api.interceptor";
 import { storeProviders } from "./features/provideStore";
+import { provideToastr } from "ngx-toastr";
 
 @Component({
   selector: "app-root",
@@ -27,5 +28,6 @@ bootstrapApplication(App, {
     storeProviders(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideHttpClient(withInterceptors([apiInterceptor])),
+    provideToastr(),
   ],
 });

@@ -4883,6 +4883,7 @@ __metadata:
     jest-preset-angular: "npm:^14.2.2"
     json-server: "npm:^1.0.0-beta.1"
     ngrx-store-localstorage: "npm:^18.0.0"
+    ngx-toastr: "npm:^19.0.0"
     rxjs: "npm:^7.8.1"
     ts-node: "npm:^10.9.2"
     tslib: "npm:^2.5.0"
@@ -9695,6 +9696,19 @@ __metadata:
     "@angular/core": ^18.0.1
     "@ngrx/store": ^18.0.0
   checksum: 10c0/df6dc2d7f53212a13d669f1a8c39bc9281c54b40c76de0a330d93a19eb7a9f55952c2cc020a0e87c7f05bd992346dc666460c7c47167b0028917d1376980d507
+  languageName: node
+  linkType: hard
+
+"ngx-toastr@npm:^19.0.0":
+  version: 19.0.0
+  resolution: "ngx-toastr@npm:19.0.0"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    "@angular/common": ">=16.0.0-0"
+    "@angular/core": ">=16.0.0-0"
+    "@angular/platform-browser": ">=16.0.0-0"
+  checksum: 10c0/af2cd5b41d2b2ab9d9f0e9369fc9a232016b49850c159c84291d822d7871c042772ee8f5cda2824cdd62ada1074c6cdfc0660c0f1f610707924ab3b6a7b170b8
   languageName: node
   linkType: hard
 

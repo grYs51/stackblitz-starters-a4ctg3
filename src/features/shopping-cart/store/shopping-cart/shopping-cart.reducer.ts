@@ -1,7 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { removeFromCart, clearCart, fetchCartItemsSuccess, decrementFromCart, incrementFromCart, addToCartSuccess } from "./shopping-cart.actions";
 
-type products = Record<string, number>;
+export type products = Record<string, number>;
 
 export interface ShoppingCartState {
   products: products;
