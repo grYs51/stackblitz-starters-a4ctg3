@@ -10,6 +10,7 @@ import {
 import { combineLatest, map } from "rxjs";
 import { ShoppingCart } from ".";
 import { selectListings } from "../../listing/store/listing-result.facade";
+import { CartItem } from "../../../shared/models/listing";
 
 const selectState = (state: object) =>
   (state as ShoppingCart).shoppingCart;
@@ -41,7 +42,7 @@ export class ShoppingCartFacade {
           ...listing,
           quantity,
         };
-      }).filter(item => item !== undefined && item.price !== undefined);
+      }).filter(item => item !== undefined && item.price !== undefined) as CartItem[];
     })
   );
 

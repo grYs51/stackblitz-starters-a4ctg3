@@ -1,0 +1,20 @@
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <mat-list>
+      @for(item of items() ; track item.id) {
+      <mat-list-item>
+        {{item.quantity}}x
+        {{item.title}}
+        <span class="item-price">{{item.price | currency : 'EUR' : 'symbol'}}</span>
+      </mat-list-item>
+      }
+    </mat-list>
+    <mat-divider></mat-divider>
+    <mat-list>
+      <mat-list-item>
+        <span>Total:</span>&nbsp;
+        <span class="total-price">{{price() | currency : 'EUR' : 'symbol'}}</span>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

@@ -2,12 +2,10 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { Listing } from '../../../../shared/models/listing';
+import { CartItem } from '../../../../shared/models/listing';
 import { CurrencyPipe } from '@angular/common';
 
-interface CartItem extends Listing {
-  quantity: number;
-}
+
 @Component({
   selector: 'app-cart-item',
   standalone: true,

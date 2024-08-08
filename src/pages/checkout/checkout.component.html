@@ -1,1 +1,11 @@
-<p>checkout works!</p>,
+<div class="container">
+  <h1>Checkout</h1>
+  <div class="grid">
+    <div class="grid-item item1">
+      <h2>Checkout</h2>
+      <app-form [form]="form" (submit)="submit()" [loading]="loading$| ngrxPush" />
+    </div>
+    <div class="grid-item item2">
+      <h2>Overview</h2>
+      <app-overview [items]="items$ | ngrxPush" />
+    </div>

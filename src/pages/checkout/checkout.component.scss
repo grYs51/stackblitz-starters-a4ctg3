@@ -1,0 +1,25 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  grid-template-areas: 
+    "item2"
+    "item1";
+  &-item {
+    margin-bottom: 20px;
+  }
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 
+      "item1 item2";
+  }
+}
+
+.item1 {
+  grid-area: item1;
+}
+
+.item2 {
+  grid-area: item2;
+}

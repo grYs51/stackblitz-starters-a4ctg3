@@ -1,0 +1,100 @@
+<mat-stepper [linear]="true" #stepper orientation="vertical">
+  <mat-step [stepControl]="shippingInfo()">
+    <form [formGroup]="shippingInfo()">
+      <ng-template matStepLabel>Shipping address</ng-template>
+      <div class="formGroup">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Last name, First name" formControlName="name">
+          <!-- validation -->
+          @if(shippingInfo().get('name')?.hasError('required')) {
+            <mat-error>
+              Name is required
+            </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Address" formControlName="address">
+          <!-- validation -->
+          @if(shippingInfo().get('address')?.hasError('required')) {
+            <mat-error>
+              Address is required
+            </mat-error>
+          }
+          @if(shippingInfo().get('address')?.hasError('minlength')) {
+            <mat-error>
+              Address must be at least 5 characters long
+            </mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="paymentInfo()">
+    <form [formGroup]="paymentInfo()">
+      <ng-template matStepLabel>Payment</ng-template>
+      <div class="formGroup">
+        <mat-form-field>
+          <mat-label>Card number</mat-label>
+          <input matInput placeholder="Card number" formControlName="cardNumber">
+          <!-- validation -->
+          @if(paymentInfo().get('cardNumber')?.hasError('required')) {
+            <mat-error>
+              Card number is required
+            </mat-error>
+          }
+          @if(paymentInfo().get('cardNumber')?.hasError('pattern')) {
+            <mat-error>
+              Card number must be a valid credit card number (e.g. 4111 1111 1111 1111)
+            </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Expiration date</mat-label>
+          <input matInput placeholder="MM/YY" formControlName="expirationDate">
+          <!-- validation -->
+          @if(paymentInfo().get('expirationDate')?.hasError('required')) {
+            <mat-error>
+              Expiration date is required
+            </mat-error>
+          }
+          @if(paymentInfo().get('expirationDate')?.hasError('pattern')) {
+            <mat-error>
+              Expiration date must be a valid date (e.g. 12/21)
+            </mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button (click)="stepper.previous()" type="button">Back</button>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Overview</ng-template>
+    <div class="formGroup">
+      <h2>Shipping address</h2>
+      <p>{{ shippingInfo().value.name }}</p>
+      <p>{{ shippingInfo().value.address }}</p>
+      <h2>Payment</h2>
+      <p>{{ paymentInfo().value.cardNumber }}</p>
+      <p>{{ paymentInfo().value.expirationDate }}</p>
+    </div>
+    <div>
+      <button mat-button (click)="stepper.previous()" type="button">Back</button>
+      
+      <button mat-button (click)="submit.emit()" [disabled]="loading()">
+        @if(loading()) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          Submit
+        }
+      </button>
+    </div>
+  </mat-step>
+</mat-stepper>
