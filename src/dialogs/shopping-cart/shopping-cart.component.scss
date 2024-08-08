@@ -1,0 +1,20 @@
+.cart-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+
+  max-height: 80vh;
+}
+
+.total {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-top: 1px solid #ccc;
+  font-size: 1.2rem;
+  font-weight: bold;
+}

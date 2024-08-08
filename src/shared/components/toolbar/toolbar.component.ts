@@ -28,6 +28,6 @@ export class ToolbarComponent {
   total$ = this.shoppingCartFacade.totalItems$;
 
   openCart() {
-    console.log("Open cart");
+    this.shoppingCartFacade.openCartDialog();
   }
 }

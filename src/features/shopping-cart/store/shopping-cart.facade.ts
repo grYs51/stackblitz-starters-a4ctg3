@@ -3,9 +3,11 @@ import { inject, Injectable } from "@angular/core";
 import {
   addToCart,
   clearCart,
+  decrementFromCart,
+  openShoppingCartDialog,
   removeFromCart,
 } from "./shopping-cart/shopping-cart.actions";
-import { map } from "rxjs";
+import { combineLatest, map } from "rxjs";
 import { ShoppingCart } from ".";
 
 const selectState = (state: object) =>
@@ -13,6 +15,7 @@ const selectState = (state: object) =>
 const selectCart = createSelector(selectState, (state) => state.products);
 const selectLoading = createSelector(selectState, (state) => state.loading);
 const selectError = createSelector(selectState, (state) => state.error);
+const selectListings = createSelector(selectState, (state) => state.listings);
 
 @Injectable()
 export class ShoppingCartFacade {
@@ -21,13 +24,39 @@ export class ShoppingCartFacade {
   cart$ = this.store.select(selectCart);
   loading$ = this.store.select(selectLoading);
   error$ = this.store.select(selectError);
+  listings$ = this.store.select(selectListings);
 
   totalItems$ = this.cart$.pipe(
     map((cart) => Object.values(cart).reduce((acc, quantity) => acc + quantity, 0))
   );
 
+  cartWithItems$ = combineLatest([
+    this.cart$,
+    this.store.select(selectListings),
+  ]).pipe(
+    map(([cart, listings]) => {
+      return Object.entries(cart).map(([id, quantity]) => {
+        const listing = listings.find((listing) => listing.id === id);
+        return {
+          ...listing,
+          quantity,
+        };
+      }).filter(item => item !== undefined && item.price !== undefined);
+    })
+  );
+
+  totalPrice$ = this.cartWithItems$.pipe(
+    map((cart) =>
+      cart.reduce((acc, item) => acc + (item.price ?? 0) * item.quantity, 0)
+    )
+  );
+
   addToCart(id: string) {
     this.store.dispatch(addToCart({ id }));
+  }
+  
+  decrement(id: string) {
+    this.store.dispatch(decrementFromCart({ id }));
   }
 
   removeFromCart(id: string) {
@@ -36,5 +65,9 @@ export class ShoppingCartFacade {
 
   clearCart() {
     this.store.dispatch(clearCart());
+  }
+
+  openCartDialog() {
+    this.store.dispatch(openShoppingCartDialog());
   }
 }

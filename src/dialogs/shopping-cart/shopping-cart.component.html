@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Shopping Cart</h2>
+<mat-dialog-content >
+  <div *ngrxLet="products$ as products" class="cart-content">
+    
+    @if(products.length === 0) {
+      <p>Your cart is empty</p>
+    } @else {
+        @for(product of products ; track product.id) {
+          <app-cart-item 
+            [product]="product" 
+            (remove)="removeFromCart($event)"
+            (increment)="incrementItem($event)"
+            (decrement)="decrementItem($event)"
+            />
+        }
+    }
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-content>  
+  <mat-divider></mat-divider>
+  <div class="total">
+    <span>Total: {{totalPrice$ | ngrxPush | currency : '€' : 'symbol'}}</span>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button [disabled]="!(total$ |ngrxPush)" [mat-dialog-close]="true">Go to checkout</button>
+</mat-dialog-actions>
