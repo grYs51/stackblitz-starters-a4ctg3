@@ -14,6 +14,7 @@ import { ShoppingCartComponent } from "../../../dialogs/shopping-cart/shopping-c
 import { ShoppingCartFacade } from "../store/shopping-cart.facade";
 import { ApiService } from "../../../shared/services/api.service";
 import { ToastrService } from "ngx-toastr";
+import { ListingResultFacade } from "../../listing/store/listing-result.facade";
 
 @Injectable()
 export class ShoppingCartEffects {
@@ -22,6 +23,8 @@ export class ShoppingCartEffects {
   matDialog = inject(MatDialog);
 
   facade = inject(ShoppingCartFacade);
+
+  listingResultFacade = inject(ListingResultFacade);
 
   api = inject(ApiService);
 
@@ -43,7 +46,7 @@ export class ShoppingCartEffects {
   addToCart$ = createEffect(() =>
     this.actions$.pipe(
       ofType(addToCart),
-      withLatestFrom(this.facade.cart$, this.facade.listings$),
+      withLatestFrom(this.facade.cart$, this.listingResultFacade.listings$),
       map(([action, cart, listings]) => {
         const listing = listings.find((listing) => listing.id === action.id);
 
@@ -55,7 +58,7 @@ export class ShoppingCartEffects {
           return addToCartFailure({ error: "Not enough stock" });
         }
         return addToCartSuccess({ id: action.id, quantity, listing });
-      })
+      }),
     )
   );
 
@@ -99,7 +102,7 @@ export class ShoppingCartEffects {
   checkIfAllItemsInCartAreAvailable$ = createEffect(() =>
     this.actions$.pipe(
       ofType(openShoppingCartDialog),
-      withLatestFrom(this.facade.cart$, this.facade.listings$),
+      withLatestFrom(this.facade.cart$, this.listingResultFacade.listings$),
       filter(([, , listings]) => !!listings),
       map(([, cart, listings]) => {
         const updatedCart = Object.entries(cart).reduce(

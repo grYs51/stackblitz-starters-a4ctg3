@@ -12,9 +12,9 @@ import { ShoppingCart } from ".";
 import { selectListings } from "../../listing/store/listing-result.facade";
 import { CartItem } from "../../../shared/models/listing";
 
-const selectState = (state: object) =>
+export const selectState = (state: object) =>
   (state as ShoppingCart).shoppingCart;
-const selectCart = createSelector(selectState, (state) => state.products);
+export const selectCart = createSelector(selectState, (state) => state.products);
 const selectLoading = createSelector(selectState, (state) => state.loading);
 const selectError = createSelector(selectState, (state) => state.error);
 
@@ -25,7 +25,6 @@ export class ShoppingCartFacade {
   cart$ = this.store.select(selectCart);
   loading$ = this.store.select(selectLoading);
   error$ = this.store.select(selectError);
-  listings$ = this.store.select(selectListings);
 
   totalItems$ = this.cart$.pipe(
     map((cart) => Object.values(cart).reduce((acc, quantity) => acc + quantity, 0))
