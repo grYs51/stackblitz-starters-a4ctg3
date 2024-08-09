@@ -2,7 +2,6 @@ import { createReducer, on } from "@ngrx/store";
 import {
   removeFromCart,
   clearCart,
-  fetchCartItemsSuccess,
   decrementFromCart,
   incrementFromCart,
   addToCartSuccess,
@@ -61,8 +60,4 @@ export const shoppingCartReducer = createReducer(
     ...state,
     products: {},
   })),
-  on(fetchCartItemsSuccess, (state, { listings }) => ({
-    ...state,
-    listings,
-  }))
 );

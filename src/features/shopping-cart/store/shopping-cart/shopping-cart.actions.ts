@@ -5,7 +5,6 @@ const shoppingCartActionGroup = createActionGroup({
   source: "Shopping Cart",
   events: {
     fetchCartItems: emptyProps(),
-    fetchCartItemsSuccess: props<{ listings: Listing[] }>(),
     fetchCartItemsFailure: props<{ error: unknown }>(),
     addToCart: props<{ id: string }>(),
     addToCartSuccess: props<{ id: string, quantity: number, listing: Listing }>(),
@@ -21,7 +20,6 @@ const shoppingCartActionGroup = createActionGroup({
 
 export const {
   fetchCartItems,
-  fetchCartItemsSuccess,
   fetchCartItemsFailure,
   addToCart,
   addToCartSuccess,
